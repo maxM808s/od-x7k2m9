@@ -35,20 +35,35 @@ const diceColors = [
 
 // ============================================
 //  RIG SYSTEM
-//  Press R / O / Y / G / B / P to block a color
+//  Single tap R/O/Y/G/B/P  = block that color
+//  Double tap (fast)       = force that color to appear
 // ============================================
 const hiddenColorNames = new Set();
+const forcedColorNames = new Set();
+const lastKeyTime = {};
+const DOUBLE_TAP_MS = 350;
 
 function buildRigDots() {
   const wrap = document.getElementById('rigDots');
   if (!wrap) return;
   wrap.innerHTML = '';
   diceColors.forEach(c => {
+    const col = document.createElement('div');
+    col.className = 'rig-col';
+
     const dot = document.createElement('div');
     dot.className = 'rig-dot';
     dot.dataset.name = c.name;
     dot.style.backgroundColor = c.hex;
-    wrap.appendChild(dot);
+
+    const force = document.createElement('div');
+    force.className = 'rig-force-dot';
+    force.dataset.force = c.name;
+    force.style.backgroundColor = c.hex;
+
+    col.appendChild(dot);
+    col.appendChild(force);
+    wrap.appendChild(col);
   });
 }
 
@@ -60,6 +75,13 @@ function updateRigDots() {
       dot.classList.remove('blocked');
     }
   });
+  document.querySelectorAll('#rigDots .rig-force-dot').forEach(dot => {
+    if (forcedColorNames.has(dot.dataset.force)) {
+      dot.classList.add('forced');
+    } else {
+      dot.classList.remove('forced');
+    }
+  });
 }
 
 document.addEventListener('keydown', (e) => {
@@ -68,15 +90,32 @@ document.addEventListener('keydown', (e) => {
 
   const key = e.key.toUpperCase();
   const matched = diceColors.find(c => c.name.charAt(0).toUpperCase() === key);
+  if (!matched) return;
 
-  if (matched) {
+  const now = Date.now();
+  const isDouble = lastKeyTime[key] && (now - lastKeyTime[key]) < DOUBLE_TAP_MS;
+  lastKeyTime[key] = now;
+
+  if (isDouble) {
+    // Double tap = force this color to appear
+    lastKeyTime[key] = 0;
+    hiddenColorNames.delete(matched.name);
+    if (forcedColorNames.has(matched.name)) {
+      forcedColorNames.delete(matched.name);
+    } else {
+      forcedColorNames.add(matched.name);
+    }
+  } else {
+    // Single tap = block / unblock
     if (hiddenColorNames.has(matched.name)) {
       hiddenColorNames.delete(matched.name);
     } else {
       hiddenColorNames.add(matched.name);
+      forcedColorNames.delete(matched.name);
     }
-    updateRigDots();
   }
+
+  updateRigDots();
 });
 
 // --- STATE ---
@@ -201,6 +240,22 @@ function rollDice() {
   const currentRollColors = [];
   for (let i = 0; i < diceCount; i++) {
     currentRollColors.push(available[getSecureRandomIndex(available.length)]);
+  }
+
+  // Guarantee any forced colors appear, in random slots
+  const forced = diceColors.filter(c => forcedColorNames.has(c.name));
+  if (forced.length > 0) {
+    const slots = [];
+    for (let i = 0; i < diceCount; i++) slots.push(i);
+    for (let i = slots.length - 1; i > 0; i--) {
+      const j = getSecureRandomIndex(i + 1);
+      const tmp = slots[i];
+      slots[i] = slots[j];
+      slots[j] = tmp;
+    }
+    forced.slice(0, diceCount).forEach((c, idx) => {
+      currentRollColors[slots[idx]] = c;
+    });
   }
 
   let revealed = false;
