@@ -30,7 +30,9 @@ header { margin: 0; padding: 0; text-align: center; }
   width: 100%;
   max-width: 400px;
   display: block;
-  margin: 10px auto -5px auto;
+  margin: -40px auto -30px auto;
+  position: relative;
+  top: 19px;
 }
 
 /* ===== Layout ===== */
