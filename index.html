@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="icon.png">
+
+  <title>Offline Dice - The Official Streamer Dice Game</title>
+  <meta name="description" content="Play Offline Dice! The ultimate custom color dice simulator used by top TikTok streamers.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700;800;900&family=Lilita+One&family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <img src="offlinetext.png" alt="Offline Dice" class="logo-img">
+  </header>
+
+  <div class="main-layout">
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <h3>OUR TOP STREAMERS</h3>
+      <div class="streamer-list">
+        <a href="https://www.tiktok.com/@arielzlatanroblox11" target="_blank" class="streamer-card-link">
+          <div class="streamer-card"><img src="ariel1.jpg" alt="Avatar" class="avatar"><div><strong>ARIEL ZLATAN <img src="streamerverify.png" alt="Verified" class="verify-badge"></strong><br><span>@arielzlatanroblox11</span></div></div>
+        </a>
+        <a href="https://www.tiktok.com/@ariel.c_h" target="_blank" class="streamer-card-link">
+          <div class="streamer-card"><img src="arielch.jpg" alt="Avatar" class="avatar"><div><strong>ARIEL C.H <img src="streamerverify.png" alt="Verified" class="verify-badge"></strong><br><span>@ariel.c_h</span></div></div>
+        </a>
+        <a href="https://www.tiktok.com/@tradelegit160" target="_blank" class="streamer-card-link">
+          <div class="streamer-card"><img src="liamtradespfp.jpg" alt="Avatar" class="avatar"><div><strong>LIAM TRADES <img src="streamerverify.png" alt="Verified" class="verify-badge"></strong><br><span>@tradelegit160</span></div></div>
+        </a>
+        <a href="https://www.tiktok.com/@itamarba23" target="_blank" class="streamer-card-link">
+          <div class="streamer-card"><img src="itamar.jpg" alt="Avatar" class="avatar"><div><strong>ITAMAR BA <img src="streamerverify.png" alt="Verified" class="verify-badge"></strong><br><span>@itamarba23</span><div class="rig-dots" id="rigDots"></div></div></div>
+        </a>
+        <a href="https://www.tiktok.com/@tyson.il" target="_blank" class="streamer-card-link">
+          <div class="streamer-card"><img src="tysonpfp.jpg" alt="Avatar" class="avatar"><div><strong>TYSON <img src="streamerverify.png" alt="Verified" class="verify-badge"></strong><br><span>@tyson.il</span></div></div>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Center Console -->
+    <main class="game-center">
+      <h3 class="roll-title">ROLL COLOR DICE</h3>
+
+      <div class="controls">
+        <select id="diceCount">
+          <option value="1">1 DIE</option>
+          <option value="2">2 DICE</option>
+          <option value="3">3 DICE</option>
+          <option value="4">4 DICE</option>
+          <option value="5">5 DICE</option>
+          <option value="6">6 DICE</option>
+          <option value="7">7 DICE</option>
+          <option value="8">8 DICE</option>
+          <option value="9">9 DICE</option>
+          <option value="10">10 DICE</option>
+          <option value="11">11 DICE</option>
+          <option value="12">12 DICE</option>
+        </select>
+
+        <select id="diceType">
+          <option value="color">COLOR DICE</option>
+        </select>
+
+        <select id="bgSelect" onchange="changeBackground()">
+          <option value="sabblack.jpg">BLACK</option>
+          <option value="sabblue.jpg">BLUE</option>
+          <option value="sabgreen.jpg">GREEN</option>
+          <option value="sabyellow.jpg">YELLOW</option>
+          <option value="sabred.jpg">RED</option>
+          <option value="sabpurple.jpg">PURPLE</option>
+          <option value="saborange.jpg">ORANGE</option>
+          <option value="darkfantasy.jpg">DARK FANTASY</option>
+          <option value="dessertbackground.jpg">DESSERT</option>
+          <option value="blossom.jpg">BLOSSOM</option>
+          <option value="underwater.jpg">UNDERWATER</option>
+          <option value="fuellingbackground.jpg">FUELLING</option>
+          <option value="arielchbackgroundd.jpg">ArielCH</option>
+          <option value="liamtradesbackground.jpg">LiamTrades</option>
+          <option value="frozybackground.jpg">Frozy</option>
+          <option value="itamarbackground.jpg">Itamar</option>
+        </select>
+      </div>
+
+      <div class="dice-display" id="diceContainer">
+        <div class="die" style="background-color: #FFA500;"><div class="die-dot"></div></div>
+      </div>
+
+      <div class="id-line">
+        ID: <strong id="gameIdDisplay">LOADING...</strong>
+      </div>
+
+      <button id="rollBtn" class="roll-btn" onclick="rollDice()">
+        <span class="stretch-text">ROLL AGAIN !</span>
+      </button>
+
+      <div class="counter-row">
+        <div class="counter-side side-left">
+          <span onclick="adjustCounter(-1)">-1</span>
+          <span onclick="adjustCounter(-0.20)">-0.20</span>
+          <span onclick="adjustCounter(-5)">-5</span>
+          <span onclick="adjustCounter(-10)">-10</span>
+        </div>
+        <div class="counter-center" id="mainCounter">+0</div>
+        <div class="counter-side side-right">
+          <span onclick="adjustCounter(1)">+1</span>
+          <span onclick="adjustCounter(0.20)">+0.20</span>
+          <span onclick="adjustCounter(5)">+5</span>
+          <span onclick="adjustCounter(10)">+10</span>
+        </div>
+      </div>
+
+      <div class="stats-container">
+        <div class="stat-pill">Rolls Today: <span id="rollsTodayCount">0</span> &#127922;</div>
+        <div class="small-grey-text">Possible colors are:
+          <span style="color:#FF0000; font-weight:800;">Red</span>,
+          <span style="color:#FFA500; font-weight:800;">Orange</span>,
+          <span style="color:#FFFF00; font-weight:800;">Yellow</span>,
+          <span style="color:#008000; font-weight:800;">Green</span>,
+          <span style="color:#0000FF; font-weight:800;">Blue</span> and
+          <span style="color:#800080; font-weight:800;">Purple</span>.
+        </div>
+      </div>
+
+      <div class="history-section">
+        <div class="history-title">- - - - &nbsp; LAST 25 ROLLS &nbsp; - - - -</div>
+        <div id="inlineHistoryList" class="inline-history-list"></div>
+      </div>
+
+      <div class="info-square">
+        <h4 class="info-square-title">HOW DOES OFFLINE DICE WORK?</h4>
+        <p class="info-square-text">This website uses virtual dice created with an algorithm that assigns equal probabilities to every possible outcome. By clicking on the 'Roll Again' button you can re-roll all the dice on this page.</p>
+        <p class="info-square-text">This page allows you to choose any number of dice between 1 and 12, each having 6 sides and 6 possible colors:<br>
+        <span style="color:#FF0000;">Red</span>, <span style="color:#FFA500;">Orange</span>, <span style="color:#FFFF00;">Yellow</span>, <span style="color:#008000;">Green</span>, <span style="color:#0000FF;">Blue</span> and <span style="color:#800080;">Purple</span>.</p>
+      </div>
+
+      <div class="info-square">
+        <h4 class="info-square-title">ABOUT US</h4>
+        <p class="info-square-text">Offline-Dice.com was created to provide the ultimate dice simulator without any annoying ads or interruptions. Enjoy a perfectly smooth rolling experience designed for live streamers, board games, or any other game of chance.</p>
+      </div>
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="sidebar">
+      <h3>OUR TOP STREAMERS</h3>
+      <div class="streamer-list">
+        <a href="https://www.tiktok.com/@bolbo321" target="_blank" class="streamer-card-link">
+          <div class="streamer-card"><img src="bolbo.jpg" alt="Avatar" class="avatar"><div><strong>BOLBO <img src="streamerverify.png" alt="Verified" class="verify-badge"></strong><br><span>@bolbo321</span></div></div>
+        </a>
+        <a href="https://www.tiktok.com/@frozy777" target="_blank" class="streamer-card-link">
+          <div class="streamer-card"><img src="frozy.jpg" alt="Avatar" class="avatar"><div><strong>FROZY <img src="streamerverify.png" alt="Verified" class="verify-badge"></strong><br><span>@frozy777</span></div></div>
+        </a>
+        <a href="https://www.tiktok.com/@kaizen3177" target="_blank" class="streamer-card-link">
+          <div class="streamer-card"><img src="kaizenpfp.jpg" alt="Avatar" class="avatar"><div><strong>KAIZEN <img src="streamerverify.png" alt="Verified" class="verify-badge"></strong><br><span>@kaizen3177</span></div></div>
+        </a>
+        <a href="https://www.tiktok.com/@mazalito255" target="_blank" class="streamer-card-link">
+          <div class="streamer-card"><img src="mazalitopfp.jpg" alt="Avatar" class="avatar"><div><strong>MAZALITO <img src="streamerverify.png" alt="Verified" class="verify-badge"></strong><br><span>@mazalito255</span></div></div>
+        </a>
+        <a href="https://www.tiktok.com/@frogy.trolly2" target="_blank" class="streamer-card-link">
+          <div class="streamer-card"><img src="froggytrolly.jpg" alt="Avatar" class="avatar"><div><strong>FROGY TROLLY <img src="streamerverify.png" alt="Verified" class="verify-badge"></strong><br><span>@frogy.trolly2</span></div></div>
+        </a>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Roll Animation Overlay -->
+  <div id="rollOverlay" class="roll-overlay hidden">
+    <h2 id="overlayTitle" class="overlay-title">ROLLING...</h2>
+    <div id="overlayDiceContainer" class="overlay-dice-container"></div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-bar">
+    <a href="https://www.tiktok.com/@fuelling_" target="_blank" class="tiktok-link-btn">
+      <svg width="14" height="16" viewBox="0 0 448 512" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/>
+      </svg>
+      Creator Tiktok
+    </a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

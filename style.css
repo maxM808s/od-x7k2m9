@@ -1,0 +1,554 @@
+/* ===== Theme Variables ===== */
+:root {
+  --theme-accent: #9e9e9e;
+  --theme-accent-dark: #212121;
+  --theme-panel-border: #bdbdbd;
+  --theme-panel-bg: rgba(15, 15, 15, 0.85);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Fredoka', sans-serif;
+  background-color: #000000;
+  color: white;
+  overflow-x: hidden;
+  padding-bottom: 70px;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  transition: background-image 0.4s ease-in-out;
+}
+
+/* ===== Header / Logo ===== */
+header { margin: 0; padding: 0; text-align: center; }
+
+.logo-img {
+  width: 100%;
+  max-width: 400px;
+  display: block;
+  margin: 10px auto -5px auto;
+}
+
+/* ===== Layout ===== */
+.main-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.sidebar, .game-center {
+  background-color: var(--theme-panel-bg);
+  border: 3px solid #FFFFFF;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  color: white;
+  transition: background-color 0.4s ease-in-out;
+}
+
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-center {
+  flex: 1;
+  max-width: 520px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ===== Titles ===== */
+.sidebar h3 {
+  font-family: 'Lilita One', cursive;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #fff;
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.roll-title {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 30px;
+  color: #FFFFFF;
+  text-align: center;
+  margin: 0 0 15px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: normal;
+  text-shadow:
+    2px 2px 0 #555,
+    -2px -2px 0 #555,
+    2px -2px 0 #555,
+    -2px 2px 0 #555,
+    4px 4px 0 #111;
+}
+
+/* ===== Streamer Cards ===== */
+.streamer-list { display: flex; flex-direction: column; gap: 8px; }
+
+.streamer-card-link { text-decoration: none; }
+
+.streamer-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 7px 11px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 11px;
+  transition: background 0.2s;
+}
+
+.streamer-card:hover { background: rgba(255, 255, 255, 0.1); }
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  background: #555;
+}
+
+.verify-badge {
+  width: 14px;
+  height: 14px;
+  margin-left: 5px;
+  vertical-align: -2px;
+  display: inline-block;
+}
+
+.streamer-card div strong {
+  font-size: 13px;
+  color: #FFFFFF;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.25;
+}
+
+.streamer-card div span {
+  font-size: 10.5px;
+  color: #B8B8B8;
+  display: block;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-top: 1px;
+}
+
+/* ===== Rig status dots ===== */
+.rig-dots { display: flex; gap: 1px; margin-top: 2px; }
+
+.rig-dot {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  opacity: 0.45;
+  transition: background-color 0.15s ease;
+}
+
+.rig-dot.blocked { background-color: #ffffff !important; }
+
+/* ===== Controls ===== */
+.controls { display: flex; gap: 10px; width: 100%; margin: 0; }
+
+.controls select {
+  flex: 1;
+  min-width: 0;
+  background: white;
+  color: #111;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.1);
+}
+
+/* ===== Dice ===== */
+.dice-display {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+  min-height: 100px;
+}
+
+.die {
+  border: 8px solid #FFFFFF;
+  border-radius: 16px;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.6);
+  will-change: transform;
+}
+
+.die-dot {
+  width: 18px;
+  height: 18px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* ===== ID line ===== */
+.id-line { text-align: center; color: white; }
+.id-line strong { font-size: 20px; letter-spacing: 1px; }
+
+/* ===== Roll Button ===== */
+.roll-btn {
+  background-color: #FFEB3B;
+  box-shadow: 0 6px 0 #FBC02D;
+  color: #FFFFFF;
+  border: none;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 34px;
+  letter-spacing: 2px;
+  -webkit-text-stroke: 0.3px #cf8800;
+  text-shadow: 2px 3px 0 #cf8800;
+  width: 100%;
+  margin: 0;
+  padding: 6px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.1;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.roll-btn:hover { background-color: #FDD835; }
+.roll-btn:active { box-shadow: 0 2px 0 #FBC02D; transform: translateY(4px); }
+.roll-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.stretch-text { display: inline-block; transform: scaleX(1.15); transform-origin: center; }
+
+/* ===== Counter ===== */
+.counter-row {
+  display: flex;
+  background-color: #2b2d31;
+  border-radius: 12px;
+  justify-content: space-between;
+  align-items: stretch;
+  color: white;
+  margin: 12px 0 15px 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+  width: 100%;
+}
+
+.counter-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #b9bbbe;
+  padding: 15px 22px;
+  min-width: 60px;
+}
+
+.side-left { align-items: flex-start; }
+.side-right { align-items: flex-end; }
+
+.counter-side span { cursor: pointer; transition: color 0.1s, transform 0.1s; user-select: none; }
+.counter-side span:hover { color: white; transform: scale(1.1); }
+.counter-side span:active { transform: scale(0.95); }
+
+.counter-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 46px;
+  color: white;
+  flex: 1;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+}
+
+/* ===== Stats ===== */
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.stat-pill {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.small-grey-text {
+  color: #e0e0e0;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* ===== History ===== */
+.history-section {
+  margin-top: 15px;
+  width: 100%;
+  background: rgba(20, 20, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 15px 20px;
+}
+
+.history-title {
+  text-align: center;
+  font-size: 14px;
+  color: #ffffff;
+  margin: 0 0 15px 0;
+  padding-bottom: 12px;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border-bottom: 2px dashed #555;
+}
+
+.inline-history-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.history-row {
+  display: inline-flex;
+  align-items: center;
+  background: #0a0a0a;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.history-number {
+  font-weight: 800;
+  color: #ffffff;
+  width: 30px;
+  text-align: right;
+  margin-right: 12px;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.history-dice-group { display: flex; gap: 6px; }
+
+.mini-die {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+.mini-die::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+}
+
+.empty-history {
+  text-align: center;
+  color: #aaa;
+  padding: 10px 0;
+  font-size: 15px;
+  font-style: italic;
+  width: 100%;
+}
+
+/* ===== Info Squares ===== */
+.info-square {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.info-square-title {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 18px;
+  color: #FFFFFF;
+  margin: 0 0 8px 0;
+  text-shadow: 2px 2px 0 #000;
+  letter-spacing: 1px;
+}
+
+.info-square-text {
+  font-size: 13px;
+  color: #FFFFFF;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0 0 10px 0;
+}
+
+.info-square-text:last-child { margin-bottom: 0; }
+
+/* ===== Footer ===== */
+.footer-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #0d0d0d;
+  padding: 12px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  border-top: 1px solid #222;
+}
+
+.tiktok-link-btn {
+  background-color: #fe2c55;
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tiktok-link-btn:hover { background-color: #e0274b; }
+
+/* ===== Roll Overlay ===== */
+.roll-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  background-color: #000;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.roll-overlay.hidden { opacity: 0; pointer-events: none; }
+
+.overlay-title {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 36px;
+  color: #FFFFFF;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+  font-weight: normal;
+  text-shadow:
+    2px 2px 0 #555,
+    -2px -2px 0 #555,
+    2px -2px 0 #555,
+    -2px 2px 0 #555,
+    4px 4px 0 #111;
+}
+
+.overlay-dice-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  justify-content: center;
+  max-width: 90%;
+}
+
+.big-die {
+  width: 90px;
+  height: 90px;
+  border-radius: 16px;
+  background-color: #E6E6E6;
+  border: 8px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  will-change: transform;
+}
+
+.big-die-dot {
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* ===== Animation ===== */
+@keyframes diceShake {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  12%  { transform: translate(-3px, 2px) rotate(-2deg); }
+  25%  { transform: translate(3px, -3px) rotate(2deg); }
+  37%  { transform: translate(-2px, -3px) rotate(-1deg); }
+  50%  { transform: translate(3px, 3px) rotate(2deg); }
+  62%  { transform: translate(-3px, -2px) rotate(-2deg); }
+  75%  { transform: translate(2px, 3px) rotate(1deg); }
+  87%  { transform: translate(-2px, 2px) rotate(-1deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.initial-shake { animation: diceShake 0.6s ease-in-out 1 forwards; }
+
+/* ===== Mobile ===== */
+@media (max-width: 900px) {
+  .main-layout { flex-direction: column; align-items: center; }
+  .sidebar { width: 100%; max-width: 520px; }
+  .roll-title { font-size: 24px; }
+  .roll-btn { font-size: 28px; }
+  .counter-center { font-size: 36px; }
+}
