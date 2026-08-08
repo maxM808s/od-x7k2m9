@@ -209,7 +209,7 @@ select {
 
 /* ===== Dice ===== */
 .dice-display {
-  margin: 14px 0;;
+  margin: 14px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -239,8 +239,23 @@ select {
 }
 
 /* ===== ID line ===== */
-.id-line { text-align: center; color: white; }
-.id-line strong { font-size: 20px; letter-spacing: 1px; }
+.id-line {
+  text-align: center !important;
+  color: white;
+  display: block !important;
+  width: 100%;
+}
+
+.id-line strong {
+  font-size: 20px;
+  letter-spacing: 1px;
+  display: inline !important;
+}
+
+.id-line span {
+  display: inline !important;
+  text-align: center !important;
+}
 
 /* ===== Roll Button ===== */
 .roll-btn {
