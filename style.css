@@ -239,22 +239,22 @@ select {
 }
 
 /* ===== ID line ===== */
+/* ===== ID line ===== */
 .id-line {
-  text-align: center !important;
+  text-align: center;
   color: white;
-  display: block !important;
-  width: 100%;
+  white-space: nowrap;
 }
 
 .id-line strong {
   font-size: 20px;
   letter-spacing: 1px;
-  display: inline !important;
 }
 
-.id-line span {
-  display: inline !important;
-  text-align: center !important;
+.verify-txt {
+  font-size: 12px;
+  text-decoration: underline;
+  margin-left: 4px;
 }
 
 /* ===== Roll Button ===== */
