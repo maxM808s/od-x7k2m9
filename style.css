@@ -69,7 +69,7 @@ header { margin: 0; padding: 0; text-align: center; }
   padding: 15px 20px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 15px;
 }
 
 /* ===== Titles ===== */
@@ -209,7 +209,7 @@ select {
 
 /* ===== Dice ===== */
 .dice-display {
-  margin: 22px 0;
+  margin: 14px 0;;
   display: flex;
   justify-content: center;
   align-items: center;
