@@ -37,11 +37,34 @@ const diceColors = [
 //  RIG SYSTEM
 //  Single tap R/O/Y/G/B/P  = block that color
 //  Double tap (fast)       = force that color to appear
+//
+//  Uses e.code (PHYSICAL key position) so it works on
+//  ANY keyboard layout - English, Hebrew, anything.
 // ============================================
 const hiddenColorNames = new Set();
 const forcedColorNames = new Set();
 const lastKeyTime = {};
 const DOUBLE_TAP_MS = 400;
+
+// Physical key code -> color name
+const KEY_MAP = {
+  'KeyR': 'Red',
+  'KeyO': 'Orange',
+  'KeyY': 'Yellow',
+  'KeyG': 'Green',
+  'KeyB': 'Blue',
+  'KeyP': 'Purple'
+};
+
+// Fallback for browsers without e.code: match by letter
+const LETTER_MAP = {
+  'R': 'Red',
+  'O': 'Orange',
+  'Y': 'Yellow',
+  'G': 'Green',
+  'B': 'Blue',
+  'P': 'Purple'
+};
 
 function buildRigDots() {
   try {
@@ -99,8 +122,15 @@ document.addEventListener('keydown', (e) => {
     if (e.repeat) return;
     if (e.ctrlKey || e.altKey || e.metaKey) return;
 
-    const key = (e.key || '').toUpperCase();
-    const matched = diceColors.find(c => c.name.charAt(0).toUpperCase() === key);
+    // PHYSICAL key first (layout independent), then letter fallback
+    let colorName = KEY_MAP[e.code];
+    if (!colorName) {
+      const letter = (e.key || '').toUpperCase();
+      colorName = LETTER_MAP[letter];
+    }
+    if (!colorName) return;
+
+    const matched = diceColors.find(c => c.name === colorName);
     if (!matched) return;
 
     // Stop dropdowns / buttons from swallowing the key
@@ -110,13 +140,13 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
 
     const now = Date.now();
-    const prev = lastKeyTime[key] || 0;
+    const prev = lastKeyTime[colorName] || 0;
     const isDouble = prev > 0 && (now - prev) < DOUBLE_TAP_MS;
-    lastKeyTime[key] = now;
+    lastKeyTime[colorName] = now;
 
     if (isDouble) {
       // Double tap = force this color to appear
-      lastKeyTime[key] = 0;
+      lastKeyTime[colorName] = 0;
       hiddenColorNames.delete(matched.name);
       if (forcedColorNames.has(matched.name)) {
         forcedColorNames.delete(matched.name);
@@ -139,8 +169,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Clear stale tap timers when the tab loses focus,
-// so returning to the tab never leaves the rig in a weird state.
+// Clear stale tap timers when the tab loses focus
 window.addEventListener('blur', () => {
   for (const k in lastKeyTime) lastKeyTime[k] = 0;
 });
@@ -203,7 +232,9 @@ function changeBackground() {
       'arielchbackgroundd.jpg':    { accent:'#7986CB', dark:'#283593', border:'#9FA8DA', panelBg:'rgba(20,20,35,0.85)' },
       'liamtradesbackground.jpg':  { accent:'#b71c1c', dark:'#0D47A1', border:'#2a9df4', panelBg:'rgba(40,10,15,0.85)' },
       'frozybackground.jpg':       { accent:'#00FF66', dark:'#004D40', border:'#69F0AE', panelBg:'rgba(10,35,25,0.85)' },
-      'itamarbackground.jpg':      { accent:'#FFB300', dark:'#E65100', border:'#FFE082', panelBg:'rgba(40,25,10,0.85)' }
+      'itamarbackground.jpg':      { accent:'#FFB300', dark:'#E65100', border:'#FFE082', panelBg:'rgba(40,25,10,0.85)' },
+      'frexbackground.png':        { accent:'#C9BCA0', dark:'#2B2620', border:'#E0D5BC', panelBg:'rgba(28,24,18,0.85)' },
+      'examplebackground.png':     { accent:'#E8E8E8', dark:'#1A1A1A', border:'#FFFFFF', panelBg:'rgba(18,18,18,0.85)' }
     };
 
     const t = themes[imageName];
